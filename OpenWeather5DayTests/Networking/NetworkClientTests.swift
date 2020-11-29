@@ -45,7 +45,7 @@ class NetworkClientTests: XCTestCase {
         XCTAssertEqual(mockSession.url, url)
     }
     
-    func test_getCharacters_fails_on_error () {
+    func test_getWeather_fails_on_error () {
         
         sut.getWeather() { result in
             
@@ -58,29 +58,32 @@ class NetworkClientTests: XCTestCase {
         }
     }
     
-    func test_getCharacters_fails_on_invalid_Json () {
+    func test_getWeather_fails_on_invalid_Json () {
         mockSession.returnData = true
-        mockSession.dataFilename = "CharactersInvalid"
+        mockSession.dataFilename = "WeatherDataInvalid"
         
         sut.getWeather() { result in
             
             do {
-                _ = try result.decoded() as [Character]
+                _ = try result.decoded() as [APIModel]
             } catch let e {
                 XCTAssertEqual(e.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
             }
         }
     }
     
-    func test_getCharacters_returns_characters_with_valid_json() throws {
+    func test_getWeather_returns_weather_with_valid_json() throws {
         
         mockSession.returnData = true
-        mockSession.dataFilename = "CharactersValid"
+        mockSession.dataFilename = "WeatherDataValid"
         
         sut.getWeather() { result in
             do {
-                let data = try result.decoded() as [String]
+                let data = try result.decoded() as APIModel
                 
+                XCTAssertEqual(data.cod, "200")
+                XCTAssertEqual(data.list.count, 40)
+                XCTAssertEqual(data.city.name, "London")
             } catch {
                 XCTFail("Data not loaded")
             }

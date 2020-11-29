@@ -18,12 +18,24 @@ struct WeatherObject: Codable {
     let main: Main
     let weather: [Weather]
     
+    enum CodingKeys: String, CodingKey {
+        case dateText = "dt_txt"
+        case main
+        case weather
+    }
+    
 }
 
 struct Main: Codable {
-    let temp: Int
-    let minTem: Int
-    let maxTemp: Int
+    let temp: Double
+    let minTemp: Double
+    let maxTemp: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case temp
+        case minTemp = "temp_min"
+        case maxTemp = "temp_max"
+    }
 }
 
 struct Weather: Codable {
