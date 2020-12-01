@@ -14,11 +14,13 @@ struct APIModel: Codable {
 }
 
 struct WeatherObject: Codable {
+    let date: Int
     let dateText: String
     let main: Main
     let weather: [Weather]
     
     enum CodingKeys: String, CodingKey {
+        case date = "dt"
         case dateText = "dt_txt"
         case main
         case weather
