@@ -32,7 +32,8 @@ class MainViewModel: MainViewModelInterface {
         networkClient.getWeather() { result in
             do {
                 let weather = try result.decoded() as APIModel
-                self.model = weather 
+                self.model = weather
+                self.viewController?.model = weather
             } catch let error {
                 self.viewController?.showAlert(message: error.localizedDescription)
             }

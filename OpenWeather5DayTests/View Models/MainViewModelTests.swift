@@ -37,12 +37,12 @@ class MainViewModelTests: XCTestCase {
         XCTAssertTrue(sut.viewController is MockMainViewController)
     }
     
-    func test_can_retrieve_characters_using_network_client() {
+    func test_can_retrieve_weather_using_network_client() {
         
-        sut.retrieveCharacters()
+        sut.retrieveWeather()
     
-        XCTAssertEqual(mockNetworkClient.getCharactersCalled, true)
-        XCTAssertEqual(self.mockViewController.model?.count, 3)
+        XCTAssertTrue(mockNetworkClient.getWeatherCalled)
+        XCTAssertTrue(self.mockViewController.reloadDataCalled)
         
     }
     
@@ -50,57 +50,29 @@ class MainViewModelTests: XCTestCase {
         
         mockNetworkClient.returnError = true
         
-        sut.retrieveCharacters()
+        sut.retrieveWeather()
         
         XCTAssertEqual(mockViewController.showAlertCalled, true)
         XCTAssertEqual(mockViewController.message, "The operation couldn’t be completed. (com.test.error error 0.)")
     }
-    
-    func test_filter_by_name_returns_correct_results() {
-        
-        sut.retrieveCharacters()
-        
-        sut.filteredContentForSearchText("Sky")
-        
-        XCTAssertEqual(mockViewController.model?.count, 1)
-        XCTAssertEqual(mockViewController.model?[0].charId, 3)
-        XCTAssertEqual(mockViewController.model?[0].name, "Skyler White")
-    }
-    
-    
-    func test_filter_by_season() {
-        
-        sut.retrieveCharacters()
-        
-        sut.filteredContentForSearchText("5", searchIndex: 1)
-        
-        XCTAssertEqual(mockViewController.model?.count, 2)
-        XCTAssertEqual(mockViewController.model?[0].charId, 1)
-        XCTAssertEqual(mockViewController.model?[0].name, "Walter White")
-        XCTAssertEqual(mockViewController.model?[1].charId, 2)
-        XCTAssertEqual(mockViewController.model?[1].name, "Jesse Pinkman")
-    }
-
-
 }
 
 class MockNetworkClient: NetworkClientInterface {
     
-    var getCharactersCalled = false
+    var getWeatherCalled = false
     var returnError = false
-
-    func getCharacters(completionHandler: @escaping (Result<Data, Error>) -> Void) {
-        getCharactersCalled = true
-        
+    let error = NSError(domain: "com.test.error", code: 0, userInfo: nil)
+    
+    func getWeather(completionHandler: @escaping (Result<Data, Error>) -> Void) {
+        getWeatherCalled = true
         if returnError {
-            let error = NSError(domain: "com.test.error", code: 0, userInfo: nil)
             completionHandler(.failure(error))
         } else {
             do {
-                let data = try Data.fromJSON(fileName: "CharactersValid")
+                let data = try Data.fromJSON(fileName: "WeatherDataValid")
                 completionHandler(.success(data))
             } catch {
-                
+                completionHandler(.failure(error))
             }
         }
     }
