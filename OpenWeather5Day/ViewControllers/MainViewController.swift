@@ -13,7 +13,13 @@ class MainViewController: UIViewController, MainViewProtocol {
     
     var viewModel: MainViewModelInterface?
     var objectFactory: ObjectFactoryInterface = ObjectFactory()
-    var model: APIModel?
+    var model: APIModel? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +44,18 @@ class MainViewController: UIViewController, MainViewProtocol {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        guard let count =  model?.list.count else { return 0 }
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath) 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath)
         
+        let weather = model?.list[indexPath.row]
+        cell.textLabel?.text = weather?.weather.first?.description
+        cell.detailTextLabel?.text = weather?.dateText
         return cell
     }
 
