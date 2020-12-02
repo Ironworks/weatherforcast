@@ -1,6 +1,5 @@
 //
 //  MainViewModelTests.swift
-//  BreakingBadCharactersTests
 //
 //  Created by Trevor Doodes on 29/10/2020.
 //
