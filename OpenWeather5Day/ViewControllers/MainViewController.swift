@@ -24,6 +24,7 @@ class MainViewController: UIViewController, MainViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.title = "London - 5 Day Forecast"
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 162
         
@@ -51,11 +52,14 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath) as? WeatherTableViewCell else {
+            return UITableViewCell()
+        }
         
         let weather = model?.list[indexPath.row]
-        cell.textLabel?.text = weather?.weather.first?.description
-        cell.detailTextLabel?.text = weather?.dateText
+        cell.dateLabel.text = weather?.dateText.formatDate()
+        cell.temperatureLabel.text = weather?.main.temp.kelvinToCelciusString()
+        cell.descriptionLabel.text = weather?.weather.first?.description
         return cell
     }
 

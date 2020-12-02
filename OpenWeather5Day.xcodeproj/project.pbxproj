@@ -30,6 +30,9 @@
 		F09F0CF52574602E007640B9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09F0CF42574602E007640B9 /* MainViewModel.swift */; };
 		F09F0CFE2574637C007640B9 /* ObjectFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09F0CFD2574637C007640B9 /* ObjectFactoryTests.swift */; };
 		F09F0D07257463E6007640B9 /* MockMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09F0D06257463E6007640B9 /* MockMainViewController.swift */; };
+		F0A0D2CD25770C0100842B73 /* String+FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A0D2CC25770C0000842B73 /* String+FormatDate.swift */; };
+		F0A0D2D625770DF400842B73 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A0D2D525770DF400842B73 /* WeatherTableViewCell.swift */; };
+		F0A0D2E3257710B300842B73 /* Double+KelvinToCelciusString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A0D2E2257710B300842B73 /* Double+KelvinToCelciusString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		F09F0CF42574602E007640B9 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F09F0CFD2574637C007640B9 /* ObjectFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectFactoryTests.swift; sourceTree = "<group>"; };
 		F09F0D06257463E6007640B9 /* MockMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMainViewController.swift; sourceTree = "<group>"; };
+		F0A0D2CC25770C0000842B73 /* String+FormatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FormatDate.swift"; sourceTree = "<group>"; };
+		F0A0D2D525770DF400842B73 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
+		F0A0D2E2257710B300842B73 /* Double+KelvinToCelciusString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+KelvinToCelciusString.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,7 @@
 		F08174EF2574466100FBD359 /* OpenWeather5Day */ = {
 			isa = PBXGroup;
 			children = (
+				F0A0D2D125770DD600842B73 /* Cells */,
 				F007EB5125746CD300F76A9B /* Observable */,
 				F09F0D0B2574651B007640B9 /* ViewControllers */,
 				F09F0CF32574601D007640B9 /* View Models */,
@@ -199,6 +206,8 @@
 			children = (
 				F081752D2574489600FBD359 /* URLSession+Result.swift */,
 				F08175322574489F00FBD359 /* Result+Decoded.swift */,
+				F0A0D2CC25770C0000842B73 /* String+FormatDate.swift */,
+				F0A0D2E2257710B300842B73 /* Double+KelvinToCelciusString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,6 +284,14 @@
 				F08174F42574466100FBD359 /* MainViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F0A0D2D125770DD600842B73 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F0A0D2D525770DF400842B73 /* WeatherTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,12 +426,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0A0D2D625770DF400842B73 /* WeatherTableViewCell.swift in Sources */,
+				F0A0D2E3257710B300842B73 /* Double+KelvinToCelciusString.swift in Sources */,
 				F081754F25744D2E00FBD359 /* APIModel.swift in Sources */,
 				F08174F52574466100FBD359 /* MainViewController.swift in Sources */,
 				F08174F12574466100FBD359 /* AppDelegate.swift in Sources */,
 				F08174F32574466100FBD359 /* SceneDelegate.swift in Sources */,
 				F08175252574484600FBD359 /* NetworkClient.swift in Sources */,
 				F09F0CEF25745FB7007640B9 /* ObjectFactory.swift in Sources */,
+				F0A0D2CD25770C0100842B73 /* String+FormatDate.swift in Sources */,
 				F007EB5325746CD300F76A9B /* Observable.swift in Sources */,
 				F081752E2574489600FBD359 /* URLSession+Result.swift in Sources */,
 				F08175332574489F00FBD359 /* Result+Decoded.swift in Sources */,
